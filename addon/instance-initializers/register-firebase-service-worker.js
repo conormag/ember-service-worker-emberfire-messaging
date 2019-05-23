@@ -10,7 +10,7 @@ export function initialize(applicationInstance, _navigator) {
     if (!_navigator) _navigator = window && window.navigator;
 
     if (_navigator && 'serviceWorker' in _navigator) {
-      const firebase = applicationInstance.lookup('service:firebase-app');
+      const firebase = applicationInstance.lookup('service:firebase');
       const { options = {} } = firebase;
 
       if (!options.messagingSenderId) {

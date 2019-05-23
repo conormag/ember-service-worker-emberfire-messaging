@@ -10,7 +10,7 @@ import { computed } from '@ember/object';
 import { oneWay } from '@ember/object/computed';
 
 export default Service.extend({
-  firebaseApp: service(),
+  firebaseApp: service('firebase'),
 
   /**
    * Firebase messaging instance
