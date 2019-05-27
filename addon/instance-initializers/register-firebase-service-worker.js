@@ -18,7 +18,8 @@ export function initialize(applicationInstance, _navigator) {
       }
 
       _navigator.serviceWorker.ready.then((reg) => {
-        return firebase.messaging().useServiceWorker(reg);
+        //return firebase.messaging().useServiceWorker(reg);
+        return firebase.get('messaging').then(messaging => messaging.useServiceWorker(reg));
       });
     }
   }
