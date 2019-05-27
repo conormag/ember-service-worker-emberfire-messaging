@@ -21,7 +21,8 @@ export function initialize(applicationInstance, _navigator) {
         console.log('messaging()', firebase.messaging() );
         console.log('messaging', firebase.messaging );
         
-        //return firebase.messaging().useServiceWorker(reg);
+        let x = firebase.messaging().useServiceWorker(reg);
+        return x;
         //return firebase.get('messaging').then(messaging => messaging.useServiceWorker(reg));
       });
     }
