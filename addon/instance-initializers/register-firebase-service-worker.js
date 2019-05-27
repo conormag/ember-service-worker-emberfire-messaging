@@ -17,7 +17,7 @@ export async function initialize(applicationInstance, _navigator) {
         throw new Error('Please set `firebase: { messagingSenderId }` in your config/environment.js');
       }
 
-      yield _navigator.serviceWorker.ready.then(async (reg) => {
+      await _navigator.serviceWorker.ready.then(async (reg) => {
         return await firebase.messaging().useServiceWorker(reg);
       });
     }
