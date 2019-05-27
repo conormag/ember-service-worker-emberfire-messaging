@@ -17,7 +17,7 @@ export default Service.extend({
    * @type {firebase.messaging.Messaging}
    */
   _messaging: computed(function() {
-    return get(this, 'firebaseApp').messaging();
+    return get(this, 'firebaseApp').messaging;
   }),
 
   /**
