@@ -17,11 +17,13 @@ export function initialize(applicationInstance, _navigator) {
         throw new Error('Please set `firebase: { messagingSenderId }` in your config/environment.js');
       }
 
-      _navigator.serviceWorker.ready.then((reg) => {
+      _navigator.serviceWorker.ready.then(async (reg) => {
         console.log('messaging()', firebase.messaging() );
         console.log('messaging', firebase.messaging );
         
-        let x = firebase.messaging().useServiceWorker(reg);
+        let x = await firebase.messaging();
+        console.log('x');
+        x.useServiceWorker(reg);
         return x;
         //return firebase.get('messaging').then(messaging => messaging.useServiceWorker(reg));
       });
