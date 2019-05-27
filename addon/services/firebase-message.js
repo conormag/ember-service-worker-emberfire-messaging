@@ -16,8 +16,8 @@ export default Service.extend({
    * Firebase messaging instance
    * @type {firebase.messaging.Messaging}
    */
-  _messaging: computed(function() {
-    return get(this, 'firebaseApp').messaging();
+  _messaging: computed(async function() {
+    return await get(this, 'firebaseApp').messaging();
   }),
 
   /**
@@ -113,11 +113,16 @@ export default Service.extend({
       /*
        Invalidate and request a new token when invalidated by FCM
        */
+      // get(this, '_messaging').onTokenRefresh(() => {
+      //   set(this, 'token', '');
+      //   this.getToken();
+      // });
+      let messaging = get(this, '_messaging');
+      console.log('messaging', messaging);
       get(this, '_messaging').onTokenRefresh(() => {
         set(this, 'token', '');
         this.getToken();
       });
-
       /**
        * Invoke subscribers queue `onMessage`
        * @param {Object} payload
