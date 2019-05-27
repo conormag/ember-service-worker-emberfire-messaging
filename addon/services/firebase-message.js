@@ -138,7 +138,9 @@ export default Service.extend({
        *   }
        * }
        */
-      get(this, '_messaging').onMessage((payload) =>
+      // get(this, '_messaging').onMessage((payload) =>
+      //   get(this, '_subscribers').forEach(fn => fn(payload)));
+      messaging.onMessage((payload) =>
         get(this, '_subscribers').forEach(fn => fn(payload)));
     }
   },
