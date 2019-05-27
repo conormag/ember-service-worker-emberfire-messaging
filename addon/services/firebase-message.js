@@ -82,8 +82,9 @@ export default Service.extend({
    * @return {Promise} token
    */
   initialize() {
-    return this.serviceWorkerReady().then(() => {
-      return get(this, '_messaging').requestPermission()
+    return this.serviceWorkerReady().then(async () => {
+      let messaging await = get(this, '_messaging');
+      return messaging.requestPermission()
         .then(this.getToken.bind(this));
     });
   },
