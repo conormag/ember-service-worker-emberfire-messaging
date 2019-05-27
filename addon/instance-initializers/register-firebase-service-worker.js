@@ -5,7 +5,7 @@
  * @param {Ember.Application} applicationInstance
  * @param {navigator} _navigator
  */
-export async function initialize(applicationInstance, _navigator) {
+export function initialize(applicationInstance, _navigator) {
   if (typeof FastBoot === 'undefined') {
     if (!_navigator) _navigator = window && window.navigator;
 
@@ -17,8 +17,9 @@ export async function initialize(applicationInstance, _navigator) {
         throw new Error('Please set `firebase: { messagingSenderId }` in your config/environment.js');
       }
 
-      await _navigator.serviceWorker.ready.then(async (reg) => {
-        return await firebase.messaging().useServiceWorker(reg);
+      _navigator.serviceWorker.ready.then(async (reg) => {
+        let messaging = await firebase.messaging();
+        return messaging.useServiceWorker(reg);
       });
     }
   }
