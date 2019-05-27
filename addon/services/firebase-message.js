@@ -16,10 +16,8 @@ export default Service.extend({
    * Firebase messaging instance
    * @type {firebase.messaging.Messaging}
    */
-  _messaging: computed(async function() {
-    let msg = await get(this, 'firebaseApp').messaging();
-    console.log("_messaging", msg);
-    return msg
+  _messaging: computed(function() {
+    return get(this, 'firebaseApp').messaging();
   }),
 
   /**
