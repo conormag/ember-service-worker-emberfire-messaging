@@ -105,7 +105,7 @@ export default Service.extend({
     });
   },
 
-  init() {
+  async init() {
     this._super(...arguments);
 
     if (get(this, '_isFastboot') === false) {
@@ -113,11 +113,15 @@ export default Service.extend({
       /*
        Invalidate and request a new token when invalidated by FCM
        */
-      get(this, '_messaging').onTokenRefresh(() => {
+      // get(this, '_messaging').onTokenRefresh(() => {
+      //   set(this, 'token', '');
+      //   this.getToken();
+      // });
+      let messaging = await get(this, '_messaging');
+      messaging.onTokenRefresh(() => {
         set(this, 'token', '');
         this.getToken();
       });
-
       /**
        * Invoke subscribers queue `onMessage`
        * @param {Object} payload
