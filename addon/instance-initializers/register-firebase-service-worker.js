@@ -18,14 +18,7 @@ export function initialize(applicationInstance, _navigator) {
       }
 
       _navigator.serviceWorker.ready.then(async (reg) => {
-        console.log('messaging()', firebase.messaging() );
-        console.log('messaging', firebase.messaging );
-        
-        let x = await firebase.messaging();
-        console.log('x');
-        x.useServiceWorker(reg);
-        return x;
-        //return firebase.get('messaging').then(messaging => messaging.useServiceWorker(reg));
+        return await firebase.messaging().useServiceWorker(reg);
       });
     }
   }
