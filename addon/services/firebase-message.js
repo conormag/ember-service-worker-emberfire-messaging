@@ -93,8 +93,9 @@ export default Service.extend({
    * Proxy for: firebase `Messaging.getToken()`
    * @return {Promise} - resolves {String} token
    */
-  getToken() {
-    return get(this, '_messaging').getToken()
+  async getToken() {
+    let messaging = await get(this, '_messaging');
+    return messaging.getToken()
     .then(token => {
       if (token) {
         return set(this, 'token', token);
