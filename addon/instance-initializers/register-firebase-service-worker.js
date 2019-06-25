@@ -7,20 +7,24 @@
  */
 export function initialize(applicationInstance, _navigator) {
   if (typeof FastBoot === 'undefined') {
-    if (!_navigator) _navigator = window && window.navigator;
+    
+    const ENV = applicationInstance.resolveRegistration('config:environment');
+    if (ENV.environment !== 'test') {
+      if (!_navigator) _navigator = window && window.navigator;
 
-    if (_navigator && 'serviceWorker' in _navigator) {
-      const firebase = applicationInstance.lookup('service:firebase-app');
-      const { options = {} } = firebase;
-
-      if (!options.messagingSenderId) {
-        throw new Error('Please set `firebase: { messagingSenderId }` in your config/environment.js');
+      if (_navigator && 'serviceWorker' in _navigator) {
+        const firebase = applicationInstance.lookup('service:firebase-app');
+        const { options = {} } = firebase;
+  
+        if (!options.messagingSenderId) {
+          throw new Error('Please set `firebase: { messagingSenderId }` in your config/environment.js');
+        }
+  
+        _navigator.serviceWorker.ready.then(async (reg) => {
+          let messaging = await firebase.messaging();
+          return messaging.useServiceWorker(reg);
+        });
       }
-
-      _navigator.serviceWorker.ready.then(async (reg) => {
-        let messaging = await firebase.messaging();
-        return messaging.useServiceWorker(reg);
-      });
     }
   }
 }
