@@ -16,7 +16,6 @@ module.exports = {
 
   treeForServiceWorker(swTree, appTree) {
     const config = this.config.call(this.app.project, this.app.env);
-
     const options = Object.assign({},
       DEFAULT_OPTIONS,
       (config.firebase || {}),
